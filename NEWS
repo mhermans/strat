@@ -1,0 +1,11 @@
+Version 0.1.2 (2011-11-29)
+----------------------------------------------------
+
+  * added ISCO88->ICAM conversion code
+  * rewrite using testthat, roxygen
+  * cleanup, switch from RForge to Github   
+
+Version 0.1.1 (2010-05-19)
+----------------------------------------------------
+
+  * initial release

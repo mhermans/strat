@@ -1,0 +1,21 @@
+Package: strat
+Title: Functions and data useful for social stratification research
+Description: The aim of the strat package is to bundle various conversion
+    tools, algorithms and visualisation code, useful for social stratification
+    research.
+Version: 0.1.2
+Author: Maarten Hermans <maarten.hermans@ua.ac.be>
+Maintainer: Maarten Hermans <maarten.hermans@ua.ac.be>
+License: GPL (>= 2)
+Depends:
+    R (>= 2.8.0)
+LazyData: true
+Collate:
+    'esec.r'
+    'icam.r'
+    'egp.r'
+    'guveli.r'
+    'isei.r'
+    'oesch.r'
+    'recode.r'
+    'siops.r'
