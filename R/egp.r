@@ -1,5 +1,5 @@
 
-r.isco88.egp <- function(x, detail) {
+r.isco88.egp <- function(x, detail = 0) {
   # Recode ISCO88 to EGP using Ganzebooms' code
 
   # Code the simple version, based on 4 digit ISCO88 values
@@ -56,6 +56,6 @@ r.isco88.egp <- function(x, detail) {
   # return root EGP values, if there is no additional info on empl. status
   if (ncol(x) == 2) { return(x$egp) }  
 
-  # TODO: reclassification code
-
+  
+  x$egp # TODO: reclassification code 
 }
