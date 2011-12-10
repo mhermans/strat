@@ -4,7 +4,7 @@ data.ganzeboom <- read.table(system.file("data/ganzeboom.txt.gz", package = "str
 test_that("ISCO88 to SIOPS recoding", {
   # single column data-frame, "oug"
   siops <- r.isco88.siops(data.frame(oug=data.ganzeboom$ISCO88))
-  expect_that(data.ganzeboom$SIOPS, equals(siops))
+  expect_equal(data.ganzeboom$SIOPS, siops)
 })
 
 test_that("ISCO88 to ISEI recoding", {
@@ -20,7 +20,7 @@ test_that("ISCO88 to ISEI recoding", {
   isei[297] <- 23 
   isei[402] <- 38
   
-  expect_that(data.ganzeboom$ISEI, equals(isei))
+  expect_equal(data.ganzeboom$ISEI, isei)
 })
 
 test_that("ISCO88 to EGP recoding (simple)", {
@@ -30,17 +30,17 @@ test_that("ISCO88 to EGP recoding (simple)", {
   #   36   51  3(4?)  4122 
   #   38   34  8(9?) 	7000
 
-  expect_that(data.ganzeboom$EGP, equals(egp))
+  expect_equal(data.ganzeboom$EGP, egp)
 })
 
 test_that("ISCO88 to ICAM recoding", {
   #TODO: quid missigns voor default ISCO88-codes?
   icam <- r.isco88.icam(data.frame(oug=data.ganzeboom$ISCO88))
-  expect_that(icam[1:5], equals(c(65.07, 69.02, 70.82, 70.84, 49.86)))
+  expect_equal(icam[1:5], c(65.07, 69.02, 70.82, 70.84, 49.86))
 })
 
 test_that("ISCO88 to ESeC recoding (simple)", {
   #TODO: quid missigns voor default ISCO88-codes?
-  esec <- r.isco88.esec(data.frame(oug=data.ganzeboom$ISCO88))
-  expect_that(esec[1:3], equals(rep(1,3)))
+  esec <- isco88_esec(data.frame(oug=data.ganzeboom$ISCO88))
+  expect_equal(esec[1:3], rep(1,3))
 })

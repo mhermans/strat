@@ -1,23 +1,23 @@
-\name{recode}
-\alias{recode}
-\title{Recode occupational and stratification schemas.}
+\name{esec}
+\alias{esec}
+\title{Recode occupational characteristics to ESeC.}
 \usage{
-  recode(data, format = "esec", labels = FALSE)
+  esec(data, details = 0, labels = FALSE)
 }
 \arguments{
   \item{data}{a single value, vector or dataframe
   containing occupational or stratification data that one
   wishes to recode. See Details.}
 
-  \item{format}{a string indicating the output format. See
+  \item{details}{a string indicating the input format. See
   Details for possible values.}
 
-  \item{detail}{the level of detail in returned
+  \item{labels}{the level of detail in returned
   classfication.  The default of 0 returns the most
   detailed form.}
-
-  \item{labels}{return a factor with value labels instead
-  of the numeric values.}
+}
+\value{
+  vector of ESeC codes/labels
 }
 \description{
   \code{recode} provides an uniform function for converting
@@ -26,7 +26,7 @@
 }
 \examples{
 isco <- c(1200, 3131, 9110)
-recode(isco, format="isco88")
+esec(isco, details=3, labels=TRUE)
 }
 \keyword{manip}
 
