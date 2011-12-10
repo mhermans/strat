@@ -9,7 +9,6 @@ Maintainer: Maarten Hermans <maarten.hermans@ua.ac.be>
 License: GPL (>= 2)
 Depends:
     R (>= 2.8.0)
-LazyData: true
 Collate:
     'esec.r'
     'icam.r'

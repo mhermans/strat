@@ -1,3 +1,7 @@
+
+  * added ESeC label function
+  * rewrite to make top level recode functions per schema available
+
 Version 0.1.2 (2011-11-29)
 ----------------------------------------------------
 
