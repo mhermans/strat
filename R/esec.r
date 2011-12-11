@@ -64,47 +64,48 @@ label_esec <- function(data) {
 
 }
 
-isco88_esec_simple <- function(x) {
+
+isco88_esec_simple <- function(data) {
   #TODO dataframe really needed?
   # Recode ISCO88, 3 digit to ESeC according to the "simple" version
 
   # ESeC class 1: 
-  x$esec[x$isco88 %in% c(010,100,110,111,114,120,121,123,200,210,211,212,
+  data$esec[data$isco88 %in% c(010,100,110,111,114,120,121,123,200,210,211,212,
     213, 214,220,221,222, 231, 235,240,241,242)] <- 1
 
   # ESeC class 2: 
-  x$esec[x$isco88 %in% c(122, 223,230,232,233,234,243, 244, 245, 246, 247, 
+  data$esec[data$isco88 %in% c(122, 223,230,232,233,234,243, 244, 245, 246, 247, 
     310, 311,312, 314, 320, 321, 322, 323, 334, 342, 344, 345, 348, 
     521)] <- 2
 
   # ESeC class 3: 
-  x$esec[x$isco88 %in% c(011,300,330,331,332,333,340, 341, 343, 346, 347, 
+  data$esec[data$isco88 %in% c(011,300,330,331,332,333,340, 341, 343, 346, 347, 
     400, 410, 411, 412, 419, 420)] <- 3
 
   # ESeC class 4: 
-  x$esec[x$isco88 %in% c(130,131,911)] <- 4
+  data$esec[data$isco88 %in% c(130,131,911)] <- 4
 
   # ESeC class 5: 
-  x$esec[x$isco88 %in% c(600,610,611,612,613,621)] <- 5
+  data$esec[data$isco88 %in% c(600,610,611,612,613,621)] <- 5
 
   # ESeC class 6: 
-  x$esec[x$isco88 %in% c(313, 315, 730,731)] <- 6
+  data$esec[data$isco88 %in% c(313, 315, 730,731)] <- 6
 
   # ESeC class 7: 
-  x$esec[x$isco88 %in% c(413, 421, 422, 500, 510, 511, 513, 514, 516, 520, 
+  data$esec[data$isco88 %in% c(413, 421, 422, 500, 510, 511, 513, 514, 516, 520, 
     522)] <- 7
 
   # ESeC class 8: 
-  x$esec[x$isco88 %in% c(614, 615, 700, 710, 711, 712, 713, 714, 720, 721, 
+  data$esec[data$isco88 %in% c(614, 615, 700, 710, 711, 712, 713, 714, 720, 721, 
     722, 723, 724, 732, 733, 734, 740, 741, 742, 743, 744, 825, 831, 
     834)] <- 8
 
   # ESeC class 9: 
-  x$esec[x$isco88 %in% c(414, 512, 800, 810, 811, 811, 812, 813, 814, 815, 
+  data$esec[data$isco88 %in% c(414, 512, 800, 810, 811, 811, 812, 813, 814, 815, 
     816, 817, 820, 821, 822, 823, 824, 826, 827, 828, 829, 830, 832, 833, 
     900, 910, 912, 913, 914, 915, 916, 920, 921, 930, 931, 932, 933)] <- 9  
 
-  x
+  data
 }
 
 collapse_esec <- function(data, detail=0) {
@@ -122,7 +123,7 @@ collapse_esec <- function(data, detail=0) {
   #  - class 9 becomes class 6.
   #
   # - 5-class model:
-  #  - classes 5 and 6 in the six class model: 
+  #  - classes 5 and 6 in the sidata class model: 
   #      "lower technical and routine occupations".
   #
   # - the three class model:
@@ -175,7 +176,7 @@ isco88_esec <- function(data, detail = 0, labels=FALSE) {
   # 4. Number of employees
   #  1-...
 
-  #x <- data.frame(x)
+  #data <- data.frame(data)
   
   data$isco88 <- substring(data$oug,1,3) # Make ISCO88 3-digit
   
@@ -192,7 +193,7 @@ isco88_esec <- function(data, detail = 0, labels=FALSE) {
     
     if (detail != 0) { 
       esec <- collapse_esec(esec, detail) 
-      message('ESeC simple: collapsing categories to X')
+      message('ESeC simple: collapsing categories to data')
     }
     
     if (labels) { 
@@ -225,8 +226,8 @@ isco88_esec <- function(data, detail = 0, labels=FALSE) {
   # ----------------------------------
 
   # a) Self-employed 10+ employees. Defaults to 1 
-  data$esec[x$status == 1] <- 1
-  x$esec[data$status == 1 & data$isco88 %in% c(344, 345)] <- 2
+  data$esec[data$status == 1] <- 1
+  data$esec[data$status == 1 & data$isco88 %in% c(344, 345)] <- 2
   data$esec[data$status == 1 & data$isco88 %in% c(011, 516)] <- 3
   data$esec[data$status == 1 & data$isco88 == 621] <- 5
 
@@ -285,8 +286,8 @@ isco88_esec <- function(data, detail = 0, labels=FALSE) {
 
   esec <- data$esec
   if (detail != 0) { 
-    esec <- collapse_esec(desec, detail) 
-    message('ESeC full: collapsing categories to X')
+    esec <- collapse_esec(esec, detail) 
+    message('ESeC full: collapsing categories to data')
   }
     
   if (labels) { 
