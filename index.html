@@ -17,24 +17,27 @@
 
 <p>The current (early) development focus is to provide an unified interface to convert between different <a href="http://www.geode.stir.ac.uk/ougs.html">occupational unit group</a> classifications (e.g. ISCO88) and stratification schema's (e.g. EGP).</p>
 
+<p>Only a part of the code has been validated against existing conversion tools, please <b>do not yet use</b> <code>strat</code> for crucial things!</p>
+
 <h2>Current features</h2>
 
 <ul>
-	<li>ISCO88 to EGP (Goldthorpe)</li>
-	<li>ISCO88 to ESeC (Eurostat)</li>
-	<li>ISCO88 to ISEI (Treirman)</li>
-	<li>ISCO88 to SIOPS (Ganzeboom)</li>
+	<li>Functions for converting ISCO88 to EGP (simple), ESeC (simple, full), ISEI, SIOPS, ICAM, Oesch, Güveli.</li>
+	<li>Basic testing/validation framework (using <a href="http://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf">testthat</a>) and labeling-functions.</li>
 </ul>
 
-<h2>Near-future roadmap</h2>
+
+
+<h2>Tentative roadmap</h2>
 
 <ul>
-	<li>ISCO88 to Oesch's class-schema</li>
-	<li>ISCO88 to Güveli's adapted EGP schema</li>
-	<li>Heisse's sheaf-coefficient</li>
+	<li>Proper validation and documentation.</li>
+	<li>Extending with additional schema's (ISCO08, Wright, Esping-Anderson).</li>
+	<li>Menu-driven SPSS interface using the SPSS Statistics-R Integration Plug-In.</li>
+	<li>Intergrating R-code for stratification analysis (mobility tables, conditional reference models, etc.).</li>
 </ul>
 	
-<h2>Installation and use</h2>
+<h2>Example session</h2>
 
 <script type="text/javascript" src="http://gist.github.com/449720.js"></script>
 
