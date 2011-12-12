@@ -18,3 +18,5 @@ Collate:
     'oesch.r'
     'recode.r'
     'siops.r'
+    'data.r'
+    'isco88.r'

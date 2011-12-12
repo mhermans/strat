@@ -1,14 +1,22 @@
 data.ganzeboom <- read.table(system.file("data/ganzeboom.txt.gz", package = "strat"),
                              header=T)
 
+#data.ess <- read.table(file.path('C:/Users/MaHermans/Documents/projects/stable/strat/',
+#                                 'testdata/ESS5_occupationvars.dat')
+
+# TEST BASIC RECODINGS
+# --------------------
+
+# 
+
 test_that("ISCO88 to SIOPS recoding", {
   # single column data-frame, "oug"
-  siops <- r.isco88.siops(data.frame(oug=data.ganzeboom$ISCO88))
+  siops <- isco88_siops(data.frame(isco88=data.ganzeboom$ISCO88))
   expect_equal(data.ganzeboom$SIOPS, siops)
 })
 
 test_that("ISCO88 to ISEI recoding", {
-  isei <- r.isco88.isei(data.frame(oug=data.ganzeboom$ISCO88))
+  isei <- isco88_isei(data.frame(isco88=data.ganzeboom$ISCO88))
   
   # TODO:
   # Mismatch Appendix A en iskoisei.sps
@@ -24,7 +32,7 @@ test_that("ISCO88 to ISEI recoding", {
 })
 
 test_that("ISCO88 to EGP recoding (simple)", {
-  egp <- r.isco88.egp(data.frame(oug=data.ganzeboom$ISCO88))
+  egp <- isco88_egp(data.frame(isco88=data.ganzeboom$ISCO88))
 
   # SIOPS ISEI EGP    ISCO884
   #   36   51  3(4?)  4122 
@@ -35,12 +43,53 @@ test_that("ISCO88 to EGP recoding (simple)", {
 
 test_that("ISCO88 to ICAM recoding", {
   #TODO: quid missigns voor default ISCO88-codes?
-  icam <- r.isco88.icam(data.frame(oug=data.ganzeboom$ISCO88))
+  icam <- isco88_icam(data.frame(isco88=data.ganzeboom$ISCO88))
   expect_equal(icam[1:5], c(65.07, 69.02, 70.82, 70.84, 49.86))
+})
+
+test_that('ISCO88 to ESec, simple function', {
+  isco88_3d <- substring(data.ganzeboom$ISCO88,1,3)
+  isco88 <- data.frame(isco88=isco88_3d)
+  esec <- isco88_esec_simple(isco88)
 })
 
 test_that("ISCO88 to ESeC recoding (simple)", {
   #TODO: quid missigns voor default ISCO88-codes?
-  esec <- isco88_esec(data.frame(oug=data.ganzeboom$ISCO88))
+  input <- isco88_isco88(data.ganzeboom$ISCO88, detail=3)
+  input <- data.frame(isco88=input)
+  esec <- isco88_esec(input)
   expect_equal(esec[1:3], rep(1,3))
+})
+
+#test_that("ISCO88 to ESeC recoding (full)", {
+#  expect_equal(1,1)
+#})
+
+# TEST HIGHER LEVEL RECODE FUNCTIONS
+# ----------------------------------
+
+test_that('isei() works', {
+  i <- isei(data.ganzeboom$ISCO88)
+  expect_equal(i, data.ganzeboom$ISEI)
+})
+
+test_that('esec() works', {
+  e <- esec(data.ganzeboom$ISCO88)
+  expect_equal(e[1:3], rep(1,3))
+})
+
+test_that('formatting works', {
+  # vectors to dataframes
+  expect_equal(format_input(1228:1230), data.frame(isco88=1228:1230))
+  expect_equal(format_input(2030), data.frame(isco88=2030))
+  
+  #expect_equal(
+  #  format_input(c(1228, 1230, 9830), detail=3), 
+  #  data.frame(isco88=c('122','123', '983'),stringsAsFactors=F)
+  #)
+})
+
+test_that('main ISCO88-ESeC function works', {
+  # direct 3digit ISCO88 should work OK
+  expect_equal(isco88_esec(data.frame(isco88=c(743, 413, 344))), c(8, 7, 2))
 })

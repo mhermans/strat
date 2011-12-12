@@ -58,7 +58,7 @@ recode <- function(data, format="esec", labels=FALSE) {
 #'
 #' @param data a single value, vector or dataframe containing occupational or
 #'        stratification data that one wishes to recode. See Details.
-#' @param details a string indicating the input format. See 
+#' @param detail a string indicating the input format. See 
 #'        Details for possible values.
 #' @param labels the level of detail in returned classfication. 
 #'        The default of 0 returns the most detailed form.
@@ -68,10 +68,36 @@ recode <- function(data, format="esec", labels=FALSE) {
 #' @examples
 #' isco <- c(1200, 3131, 9110)
 #' esec(isco, details=3, labels=TRUE)
-esec <- function(data, details=0, labels=FALSE) {
-  data <- data.frame(data)
-  if (dim(data)[2] == 1) { names(data) <- c('oug')} # label single vector
-  esec <- isco88_esec(data, details, labels)
+esec <- function(data, detail=0, labels=FALSE) {
+  data <- format_input(data)
+  data$isco88 <- isco88_isco88(data$isco88, detail=3)
+  esec <- isco88_esec(data, detail, labels)
   
   esec
+}
+
+isei <- function(data) {
+  data <- format_input(data)
+  data$isco88 <- isco88_isco88(data$isco88, detail=4)
+  isei <- isco88_isei(data)
+  
+  isei
+}
+
+
+#' Select and format variables as expected by the conversion functions
+format_input <- function(data) {
+  # possible inputs: dataframe|datamatrix|vector|list|single element
+  #   => dataframe
+  
+  if (is.vector(data)) { # vector/single value
+    data <- data.frame(isco88=data) # assue isco88 (detect?)
+  }
+  
+  # lower names
+  names(data) <- tolower(names(data)) 
+  
+  #subset(data, subset=TRUE, select=selection)?
+  
+  data
 }

@@ -2,14 +2,14 @@
 \alias{esec}
 \title{Recode occupational characteristics to ESeC.}
 \usage{
-  esec(data, details = 0, labels = FALSE)
+  esec(data, detail = 0, labels = FALSE)
 }
 \arguments{
   \item{data}{a single value, vector or dataframe
   containing occupational or stratification data that one
   wishes to recode. See Details.}
 
-  \item{details}{a string indicating the input format. See
+  \item{detail}{a string indicating the input format. See
   Details for possible values.}
 
   \item{labels}{the level of detail in returned
