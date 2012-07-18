@@ -1,5 +1,28 @@
+# ISCO88->ISEI conversion mainly based on Ganzebooms "iskoisei.sps"
+# expanded with (ISCO-COM?) codes, based on Leiulfsrud, Bison & Solheim (2010)
 
-isco88_isei <- function(data, detail=0) {
+isco88_isei <- function(data) {
+  
+  # concordance based on syntax included in
+  # Leiulfsrud, Håkon and Ivano Bison and Erling Solheim (2010): 
+  #   Social Class in Europe II Trondheim: Department of Sociology and 
+  #   Political Science, Norwegian University of Science and Technology.
+
+  # diff Ganzeboom & LBS-version:
+  #recode @isko (2470=77) into @isei.
+  #recode @isko (7139=31) into @isei.
+  #recode @isko (8233=30) into @isei.
+  #recode @isko (8287=34) into @isei.
+  #recode @isko (9122=28) into @isei.
+  
+  data$isei[data$isco88 == 2470] <- 77
+  data$isei[data$isco88 == 7139] <- 31
+  data$isei[data$isco88 == 8233] <- 30
+  data$isei[data$isco88 == 8287] <- 34
+  data$isei[data$isco88 == 9122] <- 28
+  
+  
+  # concordance based on Ganzeboom:
   
   data$isei[data$isco88 %in% c(6200, 6210, 9130, 9131, 9132, 9133, 9200, 9210, 9211, 
     9212, 9213)] <- 16

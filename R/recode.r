@@ -51,9 +51,9 @@ recode <- function(data, format="esec", labels=FALSE) {
 }
 
 
-#' Recode occupational characteristics to ESeC.
+#' Recode occupational characteristics into the ESeC socioeconomic classification.
 #'
-#' \code{recode} provides an uniform function for converting 
+#' \code{esec} provides an uniform function for converting 
 #' to and from different occupational and stratification schemas.
 #'
 #' @param data a single value, vector or dataframe containing occupational or
@@ -76,12 +76,35 @@ esec <- function(data, detail=0, labels=FALSE) {
   esec
 }
 
+#' Recode occupational characteristics to the ISEI socioeconomic scale.
+#' @param data a single value, vector or dataframe containing occupational or
+#'        stratification data that one wishes to recode. See Details.
+#' @export
+#' @examples
+#' isco <- c(1200, 3131, 9110)
+#' isei(isco)
 isei <- function(data) {
   data <- format_input(data)
   data$isco88 <- isco88_isco88(data$isco88, detail=4)
   isei <- isco88_isei(data)
   
   isei
+}
+
+
+#' Recode occupational characteristics to the SIOPS prestige scale.
+#' @param data a single value, vector or dataframe containing occupational or
+#'        stratification data that one wishes to recode. See Details.
+#' @export
+#' @examples
+#' isco <- c(1200, 3131, 9110)
+#' siops(isco)
+siops <- function(data) {
+  data <- format_input(data)
+  data$isco88 <- isco88_isco88(data$isco88, detail=4)
+  siops <- isco88_siops(data)
+  
+  siops
 }
 
 
