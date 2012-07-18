@@ -1,5 +1,18 @@
+# diff ganzeboom <-> ISS:
+#recode @isko (2470=68) into @trei.
+#recode @isko (7139=31) into @trei.
+#recode @isko (8233=30) into @trei.
+#recode @isko (8287=48) into @trei.
+#recode @isko (9122=12) into @trei.
 
 isco88_siops <- function(data, detail=0) {
+  
+  data$siops[data$isco88 == 2470] <- 68
+  data$siops[data$isco88 == 7139] <- 31
+  data$siops[data$isco88 == 8233] <- 30
+  data$siops[data$isco88 == 8287] <- 48
+  data$siops[data$isco88 == 9122] <- 12
+  
   data$siops[data$isco88 %in% c(6154)] <- 6
   data$siops[data$isco88 %in% c(9120)] <- 12
   data$siops[data$isco88 %in% c(9160, 9161, 9162)] <- 13
