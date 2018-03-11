@@ -275,7 +275,7 @@ collapse_esec <- function(data, detail=0) {
   }  
 
   # Collapse 5 class
-  if (detail == 6) {
+  if (detail == 5) {
     data[data %in% 1:2] <- 1
     data[data %in% c(3,6)] <- 2
     data[data %in% c(4,5)] <- 3
